@@ -11289,6 +11289,7 @@ MonoBehaviour:
   actionScrollbar: {fileID: 183210508}
   rebindingTilePrefab: {fileID: 1666978783179344729, guid: 5866ca1ae11a41745be7883f32f6f6c3, type: 3}
   rebindingTileParent: {fileID: 110833941}
+  actionButtons: []
   currentBindingGroup: 
 --- !u!1 &1211724988
 GameObject:

@@ -8,10 +8,6 @@ public class DeviceController : MonoBehaviour
     [SerializeField] private ControlsPanel controlsPanel;
     public InputDevice CurrentDevice { get; private set; }
 
-    private void Awake()
-    {
-        //DontDestroyOnLoad(gameObject);
-    }
     private void OnEnable()
     {
         InputSystem.onDeviceChange += (device, change) =>

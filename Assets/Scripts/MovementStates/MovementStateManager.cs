@@ -46,8 +46,8 @@ public class MovementStateManager : MonoBehaviour
     private InputAction moveAction;
     [HideInInspector] public InputAction sprintAction;
     [HideInInspector] public InputAction crouchAction;
+    [HideInInspector] public string startControlScheme;
     private PlayerInput playerInput;
-    private string startControlScheme;
     #endregion
 
     #region Animation

@@ -12,6 +12,7 @@ public class ControlsPanel : MonoBehaviour, ISettingsPanel
     [SerializeField] private Scrollbar actionScrollbar;
     [SerializeField] private RebindingTile rebindingTilePrefab;
     [SerializeField] private Transform rebindingTileParent;
+    [SerializeField] private List<Button> actionButtons;
     private List<RebindingTile> rebindingTilesList = new List<RebindingTile>();
 
     private List<string> deviceNames = new List<string>();
@@ -81,8 +82,12 @@ public class ControlsPanel : MonoBehaviour, ISettingsPanel
     }
     public void RefreshRebindingTiles()
     {
-        rebindingTilesList.ForEach(x => Destroy(x.gameObject));
-        rebindingTilesList.Clear();
+        if (rebindingTilesList.Count > 0)
+        {
+            rebindingTilesList.ForEach(x => Destroy(x.gameObject));
+            rebindingTilesList.Clear();
+        }
+
         CreateRebindingTiles();
     }
     public void SetDropdownValue(int value)
@@ -111,5 +116,20 @@ public class ControlsPanel : MonoBehaviour, ISettingsPanel
         {
             tile.ResetInputToDefault();
         }
+    }
+    public void SaveInput(InputAction action, int bindingIndex)
+    {
+        PlayerPrefs.SetString(action.actionMap + action.name + bindingIndex, action.bindings[bindingIndex].overridePath);
+        PlayerPrefs.Save();
+    }
+    public void LoadInput(InputAction action, int bindingIndex)
+    {
+        action.ApplyBindingOverride(bindingIndex, PlayerPrefs.GetString(action.actionMap + action.name + bindingIndex));
+    }
+    public void ResetButton(Button button)
+    {
+        button.interactable = false;
+        button.interactable = true;
+        button.Select();
     }
 }

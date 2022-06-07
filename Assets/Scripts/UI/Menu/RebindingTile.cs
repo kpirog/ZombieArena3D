@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
 
 public class RebindingTile : MonoBehaviour
 {
     [SerializeField] private TMP_Text inputName;
     [SerializeField] private GameObject inputObj;
     [SerializeField] private GameObject waitingForInput;
+    [SerializeField] private Button changeKeyButton;
 
     private PlayerControls playerControls;
     private ControlsPanel controlsPanel;
@@ -20,11 +22,13 @@ public class RebindingTile : MonoBehaviour
     {
         if (playerControls == null)
             playerControls = new PlayerControls();
+
+        controlsPanel = FindObjectOfType<ControlsPanel>();
     }
     private void Start()
     {
-        LoadInput();
-        
+        Load();
+
         if (action != null)
         {
             if (inputBinding.isPartOfComposite) actionName.SetText(action.name + " " + inputBinding.name);
@@ -41,46 +45,46 @@ public class RebindingTile : MonoBehaviour
     }
     public void RebindInput()
     {
-        inputObj.SetActive(false);
-        waitingForInput.SetActive(true);
-
-        var rebind = action.PerformInteractiveRebinding(bindingIndex);
-
-        bool mouseExcluded = actionName.text != "Aim" && actionName.text != "Shoot" && actionName.text != "Look"; 
-        if (mouseExcluded) rebind.WithControlsExcluding("Mouse");
-
-        rebind.OnComplete(operation =>
+        if (!controlsPanel.IsRebinding)
         {
-            inputName.text = InputControlPath.ToHumanReadableString(action.bindings[bindingIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-            inputObj.SetActive(true);
-            waitingForInput.SetActive(false);
-            rebind.Dispose();
+            controlsPanel.IsRebinding = true;
+            inputObj.SetActive(false);
+            waitingForInput.SetActive(true);
 
-        });
+            var rebind = action.PerformInteractiveRebinding(bindingIndex);
 
-        rebind.Start();
-        SaveInput();
+            bool mouseExcluded = actionName.text != "Aim" && actionName.text != "Shoot" && actionName.text != "Look";
+            if (mouseExcluded) rebind.WithControlsExcluding("Mouse");
+
+            rebind.OnComplete(operation =>
+            {
+                inputName.text = InputControlPath.ToHumanReadableString(action.bindings[bindingIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                inputObj.SetActive(true);
+                waitingForInput.SetActive(false);
+                rebind.Dispose();
+                controlsPanel.IsRebinding = false;
+            });
+
+            rebind.Start();
+            Save();
+            controlsPanel.ResetButton(changeKeyButton);
+        }
     }
     public void ResetInputToDefault()
     {
         action.RemoveBindingOverride(bindingIndex);
         inputName.text = InputControlPath.ToHumanReadableString(action.bindings[bindingIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-        SaveInput();
+        Save();
     }
-    private void SaveInput()
+    public void Save()
     {
-        PlayerPrefs.SetString(action.actionMap + action.name + bindingIndex, inputBinding.overridePath); //nie dziala
-        PlayerPrefs.Save();
+        controlsPanel.SaveInput(action, bindingIndex);
     }
-    public void LoadInput()
+    public void Load()
     {
-        if (!string.IsNullOrEmpty(action.actionMap + action.name + bindingIndex))
-        {
-            Debug.Log("JEST");
-        }
+        if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + bindingIndex)))
+            controlsPanel.LoadInput(action, bindingIndex);
         else
-        {
             ResetInputToDefault();
-        }
     }
 }

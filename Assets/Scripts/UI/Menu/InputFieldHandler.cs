@@ -55,9 +55,12 @@ public class InputFieldHandler : MonoBehaviour
     }
     public void DeSelect()
     {
-        isSelected = false;
-        inputField.interactable = false;
-        screenKeyboard.gameObject.SetActive(false);
+        if (inputField != null)
+        {
+            isSelected = false;
+            inputField.interactable = false;
+            screenKeyboard.gameObject.SetActive(false);
+        }
     }
     public void QuitInputField()
     {
