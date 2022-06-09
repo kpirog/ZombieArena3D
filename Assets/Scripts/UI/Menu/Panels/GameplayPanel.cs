@@ -8,7 +8,7 @@ public class GameplayPanel : MonoBehaviour, ISettingsPanel
 {
     [SerializeField] private Slider mouseSensSlider;
     [SerializeField] private TMP_Text mouseSensValueText;
-    private float currentSens = 1.0f;
+    [SerializeField] private float currentSens = 1.0f;
 
     [SerializeField] private Toggle invertYToggle;
     private bool isMouseInverted = true;

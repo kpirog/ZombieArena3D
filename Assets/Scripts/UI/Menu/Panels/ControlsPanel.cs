@@ -36,7 +36,6 @@ public class ControlsPanel : MonoBehaviour, ISettingsPanel
     }
     private void Start()
     {
-        CreateRebindingTiles();
         playerControls.UI.Enable();
         scrollAction.performed += ctx => actionScrollbar.value += (ctx.ReadValue<Vector2>().y * (deviceController.CurrentDevice == Keyboard.current ? 0.001f : 0.05f));
     }
@@ -104,7 +103,6 @@ public class ControlsPanel : MonoBehaviour, ISettingsPanel
         if (device == Gamepad.current) currentBindingGroup = GamepadBindingGroup;
         else currentBindingGroup = KeyboardMouseBindingGroup;
     }
-
     public void ApplySettings()
     {
         PlayerPrefs.SetString("controlScheme", currentBindingGroup);

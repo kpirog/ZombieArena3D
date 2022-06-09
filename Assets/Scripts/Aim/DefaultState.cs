@@ -8,6 +8,7 @@ public class DefaultState : AimBaseState
     {
         aim.anim.SetBool("Aiming", false);
         aim.currentFov = aim.defaultFov;
+        aim.hudUI.SetCrosshair(false);
     }
 
     public override void UpdateState(AimStateManager aim)
