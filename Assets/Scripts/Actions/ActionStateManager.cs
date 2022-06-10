@@ -15,19 +15,26 @@ public class ActionStateManager : MonoBehaviour
     private AudioSource audioSource;
     private PlayerInput playerInput;
     [HideInInspector] public InputAction reloadAction;
+    [HideInInspector] public InputAction pickUpAction;
 
     public MultiAimConstraint rHandRig;
     public TwoBoneIKConstraint lHandIK;
+    public Transform weaponSlot;
     public Transform rightHintTransform;
     public Transform rightTargetTransform;
     public Transform leftHintTransform;
     public Transform leftTargetTransform;
+
+    public bool CanPickUp { get; set; } = false;
+    public bool IsPickingUp => CanPickUp;
+    
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         currentWeapon = GetComponentInChildren<WeaponManager>();
         reloadAction = playerInput.actions["Reload"];
+        pickUpAction = playerInput.actions["PickUp"];
     }
 
     private void Start()

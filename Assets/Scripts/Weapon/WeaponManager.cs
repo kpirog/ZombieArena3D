@@ -45,8 +45,8 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = GetComponentInParent<PlayerInput>();
-        action = GetComponentInParent<ActionStateManager>();
+        playerInput = FindObjectOfType<PlayerInput>();
+        action = FindObjectOfType<ActionStateManager>();
         shootAction = playerInput.actions["Shoot"];
     }
     private void OnEnable()
@@ -62,7 +62,7 @@ public class WeaponManager : MonoBehaviour
     }
     private void Start()
     {
-        aim = GetComponentInParent<AimStateManager>();
+        aim = FindObjectOfType<AimStateManager>();
         audioSource = GetComponent<AudioSource>();
         ammo = GetComponent<WeaponAmmo>();
         recoil = GetComponent<WeaponRecoil>();
