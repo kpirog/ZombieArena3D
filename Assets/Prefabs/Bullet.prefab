@@ -227,5 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b2612f27ff6c542a9564aec5b0df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  velocity: 500
   lifeTime: 5
+  bulletHolePrefab: {fileID: 3619694142491288289, guid: 7317e26be999ee74c8894fc082c92f9a, type: 3}

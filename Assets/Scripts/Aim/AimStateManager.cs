@@ -44,6 +44,7 @@ public class AimStateManager : MonoBehaviour
     private MovementStateManager movement;
     [HideInInspector] public HudUI hudUI;
     [HideInInspector] public Animator anim;
+    public Transform recoilTransform;
     private PlayerInput playerInput;
     private InputAction lookAction;
     private InputAction aimAction;

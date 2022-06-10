@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponRecoil : MonoBehaviour
@@ -12,6 +10,13 @@ public class WeaponRecoil : MonoBehaviour
     
     private float finalRecoil;
     private float currentRecoil;
+    private AimStateManager aimStateManager;
+
+    private void Start()
+    {
+        aimStateManager = GetComponentInParent<AimStateManager>();
+        recoilTransform = aimStateManager.recoilTransform;
+    }
 
     private void Update()
     {

@@ -18,10 +18,15 @@ public class ActionStateManager : MonoBehaviour
 
     public MultiAimConstraint rHandRig;
     public TwoBoneIKConstraint lHandIK;
+    public Transform rightHintTransform;
+    public Transform rightTargetTransform;
+    public Transform leftHintTransform;
+    public Transform leftTargetTransform;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        currentWeapon = GetComponentInChildren<WeaponManager>();
         reloadAction = playerInput.actions["Reload"];
     }
 
