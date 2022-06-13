@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e28bdf1c803e488e4faa6fbc76e32, type: 3}
+  m_Name: M4A1
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 1665278311026749799, guid: eb28182d9f61a1945ab8a4da5e51b1e7, type: 3}
+  itemIcon: {fileID: 21300000, guid: a63707b58075971428388931d1afb15f, type: 3}
+  itemRarity: 1
+  sellPrice: 500
+  ammo: 500

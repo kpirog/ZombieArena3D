@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private PlayerControls playerControls;
     private PlayerInput playerInput;
     private MovementStateManager movementStateManager;
 
@@ -13,15 +12,11 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (playerControls == null)
-            playerControls = new PlayerControls();
-
         movementStateManager = FindObjectOfType<MovementStateManager>();
         playerInput = movementStateManager.GetComponent<PlayerInput>();
     }
     private void OnEnable()
     {
-        playerControls.UI.Disable();   
         LoadInputs();
     }
     private void LoadInputs()

@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bae8fd06c87c24a91229ae972ffbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemBase: {fileID: 11400000, guid: 5e18a7213067a99429c5b78064fc9ca9, type: 2}
   pickUpDistance: 2
 --- !u!1001 &1018133281212765657
 PrefabInstance:

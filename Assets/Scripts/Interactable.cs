@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    [SerializeField] private ItemBase itemBase;
     [SerializeField] private float pickUpDistance = 2f;
 
-    private bool isCollected = false;
+    protected bool isCollected = false;
     private ActionStateManager action;
-    
+    protected EquipmentUI equipmentUI;
+
+    public ItemBase ItemBase => itemBase;
 
     private void Start()
     {
         action = FindObjectOfType<ActionStateManager>();
+        equipmentUI = FindObjectOfType<EquipmentUI>();
     }
     private void Update()
     {
@@ -20,7 +24,11 @@ public class Interactable : MonoBehaviour
             isCollected = true;
         }
 
-        if (isCollected) Destroy(gameObject);
+        if (isCollected)
+        {
+            equipmentUI.AddItem(ItemBase);
+            Destroy(gameObject);
+        }
     }
     private void OnDestroy()
     {

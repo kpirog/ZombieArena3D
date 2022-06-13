@@ -107,6 +107,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollEquipment"",
+                    ""type"": ""Value"",
+                    ""id"": ""90eee967-985d-47a1-817f-7dc1dc31c5d8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -404,6 +413,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""PickUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92a95e33-560e-4e63-99ca-d49a57bc7586"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ScrollEquipment"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -788,6 +808,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_ShoulderSwap = m_Player.FindAction("ShoulderSwap", throwIfNotFound: true);
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
+        m_Player_ScrollEquipment = m_Player.FindAction("ScrollEquipment", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -864,6 +885,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_ShoulderSwap;
     private readonly InputAction m_Player_PickUp;
+    private readonly InputAction m_Player_ScrollEquipment;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -877,6 +899,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @ShoulderSwap => m_Wrapper.m_Player_ShoulderSwap;
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
+        public InputAction @ScrollEquipment => m_Wrapper.m_Player_ScrollEquipment;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -913,6 +936,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PickUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
                 @PickUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
                 @PickUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                @ScrollEquipment.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
+                @ScrollEquipment.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
+                @ScrollEquipment.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -944,6 +970,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @PickUp.started += instance.OnPickUp;
                 @PickUp.performed += instance.OnPickUp;
                 @PickUp.canceled += instance.OnPickUp;
+                @ScrollEquipment.started += instance.OnScrollEquipment;
+                @ScrollEquipment.performed += instance.OnScrollEquipment;
+                @ScrollEquipment.canceled += instance.OnScrollEquipment;
             }
         }
     }
@@ -1050,6 +1079,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnShoulderSwap(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
+        void OnScrollEquipment(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

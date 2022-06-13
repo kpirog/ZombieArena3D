@@ -11,6 +11,7 @@ public class WeaponAmmo : MonoBehaviour
 
     [HideInInspector] public int currentAmmo;
     public bool CanReload => currentAmmo < clipSize && extraAmmo > 0;
+    public int FullAmmo => currentAmmo + extraAmmo;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class WeaponAmmo : MonoBehaviour
 
     public void Reload()
     {
-        if(currentAmmo < clipSize)
+        if (currentAmmo < clipSize)
         {
             int neededAmmo = clipSize - currentAmmo;
 
@@ -28,7 +29,7 @@ public class WeaponAmmo : MonoBehaviour
                 currentAmmo = clipSize;
                 extraAmmo -= neededAmmo;
             }
-            else if(extraAmmo < neededAmmo)
+            else if (extraAmmo < neededAmmo)
             {
                 currentAmmo += extraAmmo;
                 extraAmmo = 0;

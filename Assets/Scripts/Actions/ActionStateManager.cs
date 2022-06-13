@@ -9,8 +9,8 @@ public class ActionStateManager : MonoBehaviour
     public ReloadState Reload = new ReloadState();
     public NormalState Normal = new NormalState();
 
-    public WeaponManager currentWeapon; 
-    
+    public WeaponManager currentWeapon;
+
     [HideInInspector] public Animator anim;
     private AudioSource audioSource;
     private PlayerInput playerInput;
@@ -19,7 +19,6 @@ public class ActionStateManager : MonoBehaviour
 
     public MultiAimConstraint rHandRig;
     public TwoBoneIKConstraint lHandIK;
-    public Transform weaponSlot;
     public Transform rightHintTransform;
     public Transform rightTargetTransform;
     public Transform leftHintTransform;
@@ -27,7 +26,7 @@ public class ActionStateManager : MonoBehaviour
 
     public bool CanPickUp { get; set; } = false;
     public bool IsPickingUp => CanPickUp;
-    
+
 
     private void Awake()
     {
@@ -40,7 +39,10 @@ public class ActionStateManager : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        audioSource = currentWeapon.GetComponent<AudioSource>();
+
+        if (currentWeapon != null)
+            audioSource = currentWeapon.GetComponent<AudioSource>();
+
         SwitchState(Normal);
     }
     private void Update()

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6701050428445117904}
   - component: {fileID: 6735772408333854615}
   - component: {fileID: 1472413128415921326}
+  - component: {fileID: 2288909889735081028}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635621023525146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15ae838722f5c954bb2b22f133ff9d2c, type: 3}
   m_Name: 
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635621023525146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 230826160e6cfe945871f477deccb879, type: 3}
   m_Name: 
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635621023525146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43b8eb18ea50cd548900803d525f79b6, type: 3}
   m_Name: 
@@ -256,7 +257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635621023525146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea62b9d1919bedb4e9dbe7e483084da5, type: 3}
   m_Name: 
@@ -266,6 +267,20 @@ MonoBehaviour:
   walkBloom: 1.5
   crouchBloom: 0.5
   aimBloom: 0.5
+--- !u!114 &2288909889735081028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635621023525146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bae8fd06c87c24a91229ae972ffbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemBase: {fileID: 0}
+  pickUpDistance: 2
 --- !u!1 &5420782404105231220
 GameObject:
   m_ObjectHideFlags: 0
