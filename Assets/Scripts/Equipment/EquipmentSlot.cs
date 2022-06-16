@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
@@ -15,7 +16,6 @@ public class EquipmentSlot : MonoBehaviour
     private RectTransform iconRectTransform;
     private bool isSelected = false;
     public ItemBase ItemBase { get => itemBase; set { itemBase = value; UpdateSlotUI(); } }
-
     public int SlotIndex { get; private set; }
     public bool IsSelected
     {
@@ -26,6 +26,9 @@ public class EquipmentSlot : MonoBehaviour
             isSelected = value;
         }
     }
+
+    [HideInInspector] public UnityEvent<int> onAmmoUpdated;
+
     private void Awake()
     {
         SlotIndex = transform.GetSiblingIndex();
@@ -39,23 +42,28 @@ public class EquipmentSlot : MonoBehaviour
         {
             IsSelected = true;
         }
+
+        onAmmoUpdated.AddListener(UpdateAmmoUI);
     }
+    private void OnDisable() => onAmmoUpdated.RemoveListener(UpdateAmmoUI);
     public void UpdateSlotUI()
     {
-        if (itemBase == null)
+        if (ItemBase == null)
         {
             EnableSlotUI(false);
             return;
         }
 
         EnableSlotUI(true);
-        itemIcon.sprite = itemBase.ItemIcon;
-        itemIcon.color = SetRarityColor(itemBase.ItemRarity);
-        amountText.text = itemBase.Amount > 1 ? itemBase.Amount.ToString() : string.Empty;
+        itemIcon.sprite = ItemBase.ItemIcon;
+        itemIcon.color = SetRarityColor(ItemBase.ItemRarity);
+        amountText.text = ItemBase.Amount > 1 ? ItemBase.Amount.ToString() : string.Empty;
+        EquipmentUI.Instance.SetSlotInputUI(this);
     }
     private void EnableSlotUI(bool enable)
     {
         itemIcon.enabled = enable;
+        amountText.enabled = enable;
         inputImage.gameObject.SetActive(enable);
     }
     private void SetSlotSelected(bool selected)
@@ -87,4 +95,6 @@ public class EquipmentSlot : MonoBehaviour
             default: return Color.white;
         }
     }
+    public void UpdateAmmoUI(int ammo) => amountText.text = ammo > 1 ? ammo.ToString() : string.Empty;
+    public void SetInputText(string text) => inputText.SetText(text);
 }

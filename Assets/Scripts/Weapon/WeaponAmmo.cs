@@ -4,6 +4,7 @@ public class WeaponAmmo : MonoBehaviour
 {
     public int clipSize;
     [SerializeField] private int extraAmmo;
+    private int fullAmmo;
 
     public AudioClip magInSound;
     public AudioClip magOutSound;
@@ -11,7 +12,14 @@ public class WeaponAmmo : MonoBehaviour
 
     [HideInInspector] public int currentAmmo;
     public bool CanReload => currentAmmo < clipSize && extraAmmo > 0;
-    public int FullAmmo => currentAmmo + extraAmmo;
+    public int FullAmmo
+    {
+        get => currentAmmo + extraAmmo;
+        set
+        {
+            fullAmmo = value;
+        }
+    }
 
     private void Start()
     {

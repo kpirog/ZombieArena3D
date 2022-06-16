@@ -231,6 +231,9 @@ MonoBehaviour:
   backgroundImage: {fileID: 8168596216345392457}
   amountText: {fileID: 8168596216716674013}
   inputText: {fileID: 8168596215374869075}
+  onAmmoUpdated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8168596216716673571
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,8 @@ public class WeaponManager : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction shootAction;
 
+    public AudioSource AudioSource => audioSource;
+
     [Header("Light settings")]
     [SerializeField] private float lightIntensity = 2f;
     [SerializeField] private float intensitySpeed = 10f;
@@ -89,13 +91,15 @@ public class WeaponManager : MonoBehaviour
         audioSource.PlayOneShot(shotSound);
         recoil.TriggerRecoil();
         TriggerMuzzleFlash();
-        ammo.currentAmmo--;
+        ammo.currentAmmo -= bulletsPerShot;
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
             Bullet bullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
             bullet.Release();
         }
+
+        EquipmentUI.Instance.SelectedSlot.onAmmoUpdated?.Invoke(ammo.FullAmmo);
     }
     private bool CanShoot()
     {

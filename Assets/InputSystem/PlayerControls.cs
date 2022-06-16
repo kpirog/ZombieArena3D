@@ -116,6 +116,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwitchItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b248033-6b5a-46fc-872a-50aea23f954c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad047b0d-5861-45f0-bc2a-5f7c043236e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -424,6 +442,105 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ScrollEquipment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be61a50a-0837-4955-91b8-e0d2e7bd6bc8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49a94c60-ba98-4bd0-9f89-66fdb67a6d33"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37bb1e95-9a14-4565-ac7b-21ffd94e9748"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7421ee53-da52-4c8b-9c8a-8ff672bbbf61"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c2b9690-b1d0-4ec6-a07f-da85d4292db7"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e91d9f74-9b61-40f8-8233-628c388ca98f"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d162a96-fd05-42a1-a3e9-51c400e10d68"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""266ccb30-8671-47b9-8cd1-8eedbb15b4d4"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1598d58-c168-4a24-9576-0628d54fffac"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -809,6 +926,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_ShoulderSwap = m_Player.FindAction("ShoulderSwap", throwIfNotFound: true);
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
         m_Player_ScrollEquipment = m_Player.FindAction("ScrollEquipment", throwIfNotFound: true);
+        m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
+        m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -886,6 +1005,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ShoulderSwap;
     private readonly InputAction m_Player_PickUp;
     private readonly InputAction m_Player_ScrollEquipment;
+    private readonly InputAction m_Player_SwitchItem;
+    private readonly InputAction m_Player_Drop;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -900,6 +1021,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @ShoulderSwap => m_Wrapper.m_Player_ShoulderSwap;
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
         public InputAction @ScrollEquipment => m_Wrapper.m_Player_ScrollEquipment;
+        public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
+        public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -939,6 +1062,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ScrollEquipment.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
                 @ScrollEquipment.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
                 @ScrollEquipment.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollEquipment;
+                @SwitchItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItem;
+                @SwitchItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItem;
+                @SwitchItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchItem;
+                @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -973,6 +1102,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ScrollEquipment.started += instance.OnScrollEquipment;
                 @ScrollEquipment.performed += instance.OnScrollEquipment;
                 @ScrollEquipment.canceled += instance.OnScrollEquipment;
+                @SwitchItem.started += instance.OnSwitchItem;
+                @SwitchItem.performed += instance.OnSwitchItem;
+                @SwitchItem.canceled += instance.OnSwitchItem;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
         }
     }
@@ -1080,6 +1215,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnShoulderSwap(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
         void OnScrollEquipment(InputAction.CallbackContext context);
+        void OnSwitchItem(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

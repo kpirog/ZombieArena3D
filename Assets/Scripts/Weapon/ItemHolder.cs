@@ -4,32 +4,52 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour
 {
-    public List<Interactable> interactables;
+    public List<HandSlot> handSlots;
+
+    private ActionStateManager actionStateManager;
+
+    private bool AnyHandSlotActive => handSlots.Any(x => x.gameObject.activeInHierarchy);
 
     private void Awake()
     {
-        interactables = new List<Interactable>(GetComponentsInChildren<Interactable>());
+        handSlots = new List<HandSlot>(GetComponentsInChildren<HandSlot>());
+        actionStateManager = FindObjectOfType<ActionStateManager>();
     }
-    public void CreateItem(Interactable interactable)
+    private void Start()
     {
-        interactable = Instantiate(interactable, transform.position, Quaternion.identity, transform);
-        interactables.Add(interactable);
-        
-        Weapon weapon = interactable as Weapon;
-        if (weapon != null) weapon.IsInEquipment = true;
-
-        interactable.gameObject.SetActive(false);
-
-        if (interactables.Count == 1) SetItemActive(0);
+        handSlots.ForEach(x => x.gameObject.SetActive(false));
+    }
+    private void Update()
+    {
+        if(!AnyHandSlotActive) SetItemActive(0);
+    }
+    public void CreateItem(Interactable interactable, int slotIndex)
+    {
+        handSlots[slotIndex].gameObject.SetActive(true);
+        handSlots[slotIndex].CreateItem(interactable);
+        handSlots[slotIndex].gameObject.SetActive(false);
     }
     public void SetItemActive(int index)
     {
-        if (interactables.Count == 0 || index > interactables.Count - 1) return;
+        if (handSlots.Count == 0) return;
 
-        Interactable activeItem = interactables.Where(x => x.gameObject.activeInHierarchy).FirstOrDefault();
+        HandSlot activeSlot = handSlots.Where(x => x.gameObject.activeInHierarchy).FirstOrDefault();
 
-        if (activeItem != null) activeItem.gameObject.SetActive(false);
+        if (activeSlot != null) activeSlot.gameObject.SetActive(false);
 
-        interactables[index].gameObject.SetActive(true);
+        if (index <= handSlots.Count - 1)
+        {
+            HandSlot currentSlot = handSlots[index];
+            currentSlot.gameObject.SetActive(true);
+
+            if (currentSlot.item as Weapon != null)
+            {
+                actionStateManager.SwitchCurrentWeapon((currentSlot.item as Weapon).weaponManager);
+            }
+        }
+    }
+    public void DestroyItem(int index)
+    {
+        handSlots[index].DestroyItem();
     }
 }

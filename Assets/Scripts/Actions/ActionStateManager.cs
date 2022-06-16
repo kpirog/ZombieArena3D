@@ -24,6 +24,7 @@ public class ActionStateManager : MonoBehaviour
     public Transform leftHintTransform;
     public Transform leftTargetTransform;
 
+    public AudioSource AudioSource => currentWeapon.AudioSource;
     public bool CanPickUp { get; set; } = false;
     public bool IsPickingUp => CanPickUp;
 
@@ -39,10 +40,6 @@ public class ActionStateManager : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-
-        if (currentWeapon != null)
-            audioSource = currentWeapon.GetComponent<AudioSource>();
-
         SwitchState(Normal);
     }
     private void Update()
@@ -59,7 +56,8 @@ public class ActionStateManager : MonoBehaviour
         SwitchState(Normal);
         currentWeapon.ammo.Reload();
     }
-    public void MagIn() => audioSource.PlayOneShot(currentWeapon.ammo.magInSound);
-    public void MagOut() => audioSource.PlayOneShot(currentWeapon.ammo.magOutSound);
-    public void ReleaseSlide() => audioSource.PlayOneShot(currentWeapon.ammo.releaseSlideSound);
+    public void SwitchCurrentWeapon(WeaponManager newWeapon) => currentWeapon = newWeapon;
+    public void MagIn() => AudioSource.PlayOneShot(currentWeapon.ammo.magInSound);
+    public void MagOut() => AudioSource.PlayOneShot(currentWeapon.ammo.magOutSound);
+    public void ReleaseSlide() => AudioSource.PlayOneShot(currentWeapon.ammo.releaseSlideSound);
 }

@@ -279,8 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bae8fd06c87c24a91229ae972ffbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemBase: {fileID: 0}
+  itemBase: {fileID: 11400000, guid: 020dc32704ddfb449a5b7409d55028fb, type: 2}
   pickUpDistance: 2
+  weaponManager: {fileID: 0}
 --- !u!1 &5420782404105231220
 GameObject:
   m_ObjectHideFlags: 0

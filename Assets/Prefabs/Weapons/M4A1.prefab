@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemBase: {fileID: 11400000, guid: 5e18a7213067a99429c5b78064fc9ca9, type: 2}
   pickUpDistance: 2
+  weaponManager: {fileID: 0}
 --- !u!1001 &1018133281212765657
 PrefabInstance:
   m_ObjectHideFlags: 0

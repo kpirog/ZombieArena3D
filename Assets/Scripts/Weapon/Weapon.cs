@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class Weapon : Interactable
 {
-    private WeaponManager weaponManager;
+    [HideInInspector] public WeaponManager weaponManager;
     private WeaponAmmo weaponAmmo;
     private WeaponRecoil weaponRecoil;
     private WeaponBloom weaponBloom;
 
-    private bool isInEquipment;
-    public bool IsInEquipment 
+    public override bool IsInEquipment 
     {
         get => isInEquipment;
         set
