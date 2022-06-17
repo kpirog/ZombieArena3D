@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 2288909889735081028, guid: 4bc753dd8f8587e4192f089aa58333d9, type: 3}
   itemIcon: {fileID: 21300000, guid: 9ca23621c2a972b4bb4b225a407ad74c, type: 3}
-  itemRarity: 0
+  itemRarity: {fileID: 11400000, guid: 7439869e82403f54c8ecdcaefd6fb930, type: 2}
   sellPrice: 250
   ammo: 120

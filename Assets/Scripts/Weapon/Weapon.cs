@@ -16,12 +16,18 @@ public class Weapon : Interactable
             isInEquipment = value;
         } 
     } 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         weaponManager = GetComponent<WeaponManager>();
         weaponAmmo = GetComponent<WeaponAmmo>();
         weaponRecoil = GetComponent<WeaponRecoil>();
         weaponBloom = GetComponent<WeaponBloom>();
+    }
+    private void OnEnable()
+    {
+        anim.SetBool("IsInEquipment", IsInEquipment);
     }
     public void ToggleComponents(bool enabled)
     {

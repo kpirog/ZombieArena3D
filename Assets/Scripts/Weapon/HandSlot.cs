@@ -13,6 +13,7 @@ public class HandSlot : MonoBehaviour
 
             Weapon weapon = item as Weapon;
             if (weapon != null) weapon.IsInEquipment = true;
+            weapon.anim.SetBool("IsInEquipment", true);
         }
     }
     public void DestroyItem()

@@ -14,7 +14,3 @@ public abstract class ItemBase : ScriptableObject
     public int SellPrice => sellPrice;
     public abstract int Amount { get; }
 }
-public enum ItemRarity
-{
-    Common, Rare, Epic, Legendary
-}

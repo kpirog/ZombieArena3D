@@ -110,6 +110,8 @@ public class EquipmentUI : MonoBehaviour
             {
                 emptySlot.ItemBase = item;
                 itemHolder.CreateItem(item.ItemPrefab, emptySlot.SlotIndex);
+                
+                if(emptySlot.IsSelected) itemHolder.SetItemActive(emptySlot.SlotIndex);
             }
             else
             {
@@ -125,6 +127,7 @@ public class EquipmentUI : MonoBehaviour
         {
             Vector3 dropPosition = new Vector3(player.localPosition.x, player.localPosition.y, player.localPosition.z) + player.forward;
             Interactable dropItem = Instantiate(item.ItemPrefab, dropPosition, Quaternion.identity);
+            dropItem.IsInEquipment = false;
             itemHolder.DestroyItem(SelectedSlot.SlotIndex);
         }
     }

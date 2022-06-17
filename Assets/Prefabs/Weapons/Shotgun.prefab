@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4391025753979714565}
   - component: {fileID: 1951459285260929231}
   - component: {fileID: 6924551308228774642}
+  - component: {fileID: 9012709985686912724}
+  - component: {fileID: 6974418747639954453}
   - component: {fileID: 4366965275918237209}
   - component: {fileID: 6701050428445117904}
   - component: {fileID: 6735772408333854615}
@@ -31,15 +33,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635621023525146}
-  m_LocalRotation: {x: -0.6741299, y: 0.72698826, z: 0.088750795, w: -0.09570972}
-  m_LocalPosition: {x: -0.0535, y: 0.2819, z: 0.0099}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1990680429899656643}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 195, z: -85.679}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &4391025753979714565
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -186,6 +188,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &9012709985686912724
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635621023525146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9943263, y: 0.18533453, z: 0.034615383}
+  m_Center: {x: -0.14205915, y: -0.027397875, z: -0.000000012107196}
+--- !u!95 &6974418747639954453
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635621023525146}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49a72d1c06d1f764ea9eb44a3bb54d73, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4366965275918237209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemBase: {fileID: 11400000, guid: 020dc32704ddfb449a5b7409d55028fb, type: 2}
   pickUpDistance: 2
+  anim: {fileID: 0}
   weaponManager: {fileID: 0}
 --- !u!1 &5420782404105231220
 GameObject:

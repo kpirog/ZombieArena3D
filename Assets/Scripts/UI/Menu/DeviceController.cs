@@ -25,7 +25,7 @@ public class DeviceController : MonoBehaviour
     }
     private void Start()
     {
-        SetCurrentDevice(2);
+        SetCurrentDevice(0);
     }
     public void SetCurrentDevice(int deviceIndex)
     {

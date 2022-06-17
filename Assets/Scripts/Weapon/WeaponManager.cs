@@ -78,6 +78,8 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
+        if (action.currentState == action.Reload) return;
+        
         if (CanShoot() && shootAction.triggered && ammo.currentAmmo > 0) Shoot();
         if (CanShoot() && IsShooting && ammo.currentAmmo > 0) Shoot();
 

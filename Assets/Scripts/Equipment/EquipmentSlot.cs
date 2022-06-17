@@ -56,7 +56,7 @@ public class EquipmentSlot : MonoBehaviour
 
         EnableSlotUI(true);
         itemIcon.sprite = ItemBase.ItemIcon;
-        itemIcon.color = SetRarityColor(ItemBase.ItemRarity);
+        itemIcon.color = ItemBase.ItemRarity.color;
         amountText.text = ItemBase.Amount > 1 ? ItemBase.Amount.ToString() : string.Empty;
         EquipmentUI.Instance.SetSlotInputUI(this);
     }
@@ -82,17 +82,6 @@ public class EquipmentSlot : MonoBehaviour
             iconRectTransform.offsetMax = Vector2.zero;
             iconRectTransform.offsetMin = Vector2.zero;
             backgroundImage.color = lightColor;
-        }
-    }
-    private Color SetRarityColor(ItemRarity rarity)
-    {
-        switch (rarity)
-        {
-            case ItemRarity.Common: return Color.grey;
-            case ItemRarity.Rare: return Color.blue;
-            case ItemRarity.Epic: return Color.magenta;
-            case ItemRarity.Legendary: return Color.yellow;
-            default: return Color.white;
         }
     }
     public void UpdateAmmoUI(int ammo) => amountText.text = ammo > 1 ? ammo.ToString() : string.Empty;
