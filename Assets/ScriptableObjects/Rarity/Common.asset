@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Common
   m_EditorClassIdentifier: 
   name: Common
-  color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  color: {r: 0.5398972, g: 0.9528302, b: 0.373042, a: 1}

@@ -396,6 +396,7 @@ MonoBehaviour:
   magInSound: {fileID: 8300000, guid: dbc755e072d02bd41a520d26ded701d0, type: 3}
   magOutSound: {fileID: 8300000, guid: 4442512457e037542982b7c4c89d827b, type: 3}
   releaseSlideSound: {fileID: 8300000, guid: 3555abd15913bf446a419fcbfaf6da48, type: 3}
+  ammoType: 0
   currentAmmo: 0
 --- !u!114 &3670368328218123003
 MonoBehaviour:
@@ -447,6 +448,7 @@ MonoBehaviour:
   pickUpDistance: 2
   anim: {fileID: 0}
   weaponManager: {fileID: 0}
+  weaponAmmo: {fileID: 0}
 --- !u!1001 &1018133281212765657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -519,6 +521,18 @@ PrefabInstance:
     - target: {fileID: 3798781585610572471, guid: 505f0d5899294cf49b6199ae18afbf18, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798781585610572471, guid: 505f0d5899294cf49b6199ae18afbf18, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798781585610572471, guid: 505f0d5899294cf49b6199ae18afbf18, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798781585610572471, guid: 505f0d5899294cf49b6199ae18afbf18, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3798781585610572471, guid: 505f0d5899294cf49b6199ae18afbf18, type: 3}
       propertyPath: m_LocalPosition.x

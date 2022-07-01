@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private ItemBase itemBase;
@@ -13,7 +14,7 @@ public class Interactable : MonoBehaviour
     protected Item3DTooltip tooltip;
 
     protected EquipmentUI equipmentUI;
-    [HideInInspector] public Animator anim;
+    public Animator anim;
     public ItemBase ItemBase => itemBase;
     public virtual bool IsInEquipment
     {
@@ -22,6 +23,7 @@ public class Interactable : MonoBehaviour
         {
             SetRarityParticle(value);
             isInEquipment = value;
+            anim.SetBool("IsInEquipment", value);
         }
     }
     protected virtual void Awake()
@@ -31,6 +33,10 @@ public class Interactable : MonoBehaviour
         tooltip = FindObjectOfType<Item3DTooltip>();
         anim = GetComponent<Animator>();
         SetRarityParticle(IsInEquipment);
+    }
+    private void Start()
+    {
+        anim.SetBool("IsInEquipment", IsInEquipment);
     }
     private void Update()
     {

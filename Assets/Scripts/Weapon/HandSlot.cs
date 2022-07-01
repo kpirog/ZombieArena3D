@@ -8,12 +8,10 @@ public class HandSlot : MonoBehaviour
     {
         if (item == null)
         {
-            interactable = Instantiate(interactable, transform.position, Quaternion.identity, transform);
-            item = interactable;
-
-            Weapon weapon = item as Weapon;
-            if (weapon != null) weapon.IsInEquipment = true;
-            weapon.anim.SetBool("IsInEquipment", true);
+            Interactable newInteractable = Instantiate(interactable, transform.position, Quaternion.identity, transform);
+            newInteractable.IsInEquipment = true;
+            newInteractable.anim.SetBool("IsInEquipment", true);
+            item = newInteractable;
         }
     }
     public void DestroyItem()

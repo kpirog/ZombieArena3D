@@ -7,7 +7,7 @@ public class EquipmentUI : MonoBehaviour
     public static EquipmentUI Instance { get; private set; }
 
     [SerializeField] private EquipmentSlot[] equipmentSlots;
-    
+
     [SerializeField] private ItemBase[] testItems;
 
     private Transform player;
@@ -102,7 +102,7 @@ public class EquipmentUI : MonoBehaviour
     }
     public void AddItem(ItemBase item)
     {
-        if (item as WeaponItem != null)
+        if (item as WeaponItem != null || item as ConsumableItem != null)
         {
             EquipmentSlot emptySlot = equipmentSlots.Where(x => x.ItemBase == null).FirstOrDefault();
 
@@ -123,7 +123,7 @@ public class EquipmentUI : MonoBehaviour
     }
     private void DropItem(ItemBase item)
     {
-        if (item as WeaponItem != null)
+        if (item != null)
         {
             Vector3 dropPosition = new Vector3(player.localPosition.x, player.localPosition.y, player.localPosition.z) + player.forward;
             Interactable dropItem = Instantiate(item.ItemPrefab, dropPosition, Quaternion.identity);
@@ -133,9 +133,9 @@ public class EquipmentUI : MonoBehaviour
     }
     private void DropActiveItem()
     {
-        WeaponItem weaponItem = SelectedSlot.ItemBase as WeaponItem;
+        ItemBase item = SelectedSlot.ItemBase;
 
-        if (weaponItem != null)
+        if (item != null)
         {
             DropItem(SelectedSlot.ItemBase);
             SelectedSlot.ItemBase = null;

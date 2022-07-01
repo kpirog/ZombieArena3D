@@ -15,6 +15,7 @@ public class Weapon : Interactable
             SetRarityParticle(value);
             ToggleComponents(value);
             isInEquipment = value;
+            anim.SetBool("IsInEquipment", value);
         } 
     } 
     protected override void Awake()

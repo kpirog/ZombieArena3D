@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541f3a454ed83d34bae8e97eb02e7d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactables: []
+  handSlots: []
 --- !u!1 &121555529173712893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7784201, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2411,6 +2411,7 @@ GameObject:
   - component: {fileID: 6421279892030124818}
   - component: {fileID: 6421279892030124822}
   - component: {fileID: 6421279892030124823}
+  - component: {fileID: 757883835517543816}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2633,6 +2634,19 @@ MonoBehaviour:
   - m_Rig: {fileID: 6421279891065594948}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &757883835517543816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421279892030124906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef9d006afb135446b9b85290558c79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsModel: {fileID: 11400000, guid: feff5a2ab0a925c4185a220ba6f73878, type: 2}
 --- !u!1 &6421279892224749557
 GameObject:
   m_ObjectHideFlags: 0
