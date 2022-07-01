@@ -52966,8 +52966,10 @@ MonoBehaviour:
   - {fileID: 1945190477}
   - {fileID: 1736143512}
   - {fileID: 610629228}
-  testItemBase: {fileID: 11400000, guid: 5e18a7213067a99429c5b78064fc9ca9, type: 2}
-  testItemBase2: {fileID: 11400000, guid: 020dc32704ddfb449a5b7409d55028fb, type: 2}
+  testItems:
+  - {fileID: 11400000, guid: 7f9c469d6c43525428ffab8e86964145, type: 2}
+  - {fileID: 11400000, guid: 5e18a7213067a99429c5b78064fc9ca9, type: 2}
+  - {fileID: 11400000, guid: 020dc32704ddfb449a5b7409d55028fb, type: 2}
 --- !u!1 &1548431078
 GameObject:
   m_ObjectHideFlags: 0

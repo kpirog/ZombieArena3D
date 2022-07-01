@@ -68,6 +68,7 @@ public class WeaponManager : MonoBehaviour
     }
     private void Start()
     {
+        SetWeaponPosition();
         aim = FindObjectOfType<AimStateManager>();
         audioSource = GetComponent<AudioSource>();
         ammo = GetComponent<WeaponAmmo>();

@@ -7,8 +7,8 @@ public class EquipmentUI : MonoBehaviour
     public static EquipmentUI Instance { get; private set; }
 
     [SerializeField] private EquipmentSlot[] equipmentSlots;
-    [SerializeField] private ItemBase testItemBase;
-    [SerializeField] private ItemBase testItemBase2;
+    
+    [SerializeField] private ItemBase[] testItems;
 
     private Transform player;
     private ItemHolder itemHolder;
@@ -102,12 +102,6 @@ public class EquipmentUI : MonoBehaviour
     }
     public void AddItem(ItemBase item)
     {
-        //if (item as AmmoItem != null)
-        //{
-        //    AmmoItem ammo = item as AmmoItem;
-
-        //    WeaponAmmo weaponAmmo = 
-        //}
         if (item as WeaponItem != null)
         {
             EquipmentSlot emptySlot = equipmentSlots.Where(x => x.ItemBase == null).FirstOrDefault();
@@ -156,8 +150,10 @@ public class EquipmentUI : MonoBehaviour
     [ContextMenu("Test Add")]
     public void TestAdd()
     {
-        AddItem(testItemBase2);
-        AddItem(testItemBase);
+        foreach (var item in testItems)
+        {
+            AddItem(item);
+        }
     }
     public EquipmentSlot GetWeaponSlot(WeaponItem weapon)
     {

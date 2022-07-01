@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e28bdf1c803e488e4faa6fbc76e32, type: 3}
+  m_Name: Glock
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 4506989135700450564, guid: 4861bfbd79b67da4d94bee9d5977206c, type: 3}
+  itemIcon: {fileID: 21300000, guid: d03e4e6762e416546a4385408c928dc6, type: 3}
+  itemRarity: {fileID: 11400000, guid: 7439869e82403f54c8ecdcaefd6fb930, type: 2}
+  sellPrice: 100
+  ammo: 120
