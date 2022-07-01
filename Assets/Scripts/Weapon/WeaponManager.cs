@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour
@@ -45,6 +46,9 @@ public class WeaponManager : MonoBehaviour
     private ParticleSystem muzzleFlashParticles;
     private Light muzzleFlashLight;
 
+    public int MaxBulletPoolAmount => ammo.clipSize;
+    private IObjectPool<Bullet> bulletPool;
+
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
@@ -74,12 +78,13 @@ public class WeaponManager : MonoBehaviour
         lightIntensity = muzzleFlashLight.intensity;
         muzzleFlashLight.intensity = 0f;
         fireRateTimer = fireRate;
+        bulletPool = new ObjectPool<Bullet>(CreateBullet, OnBulletGet, OnBulletRelease, OnBulletDestroy, maxSize: MaxBulletPoolAmount);
     }
 
     private void Update()
     {
         if (action.currentState == action.Reload) return;
-        
+
         if (CanShoot() && shootAction.triggered && ammo.currentAmmo > 0) Shoot();
         if (CanShoot() && IsShooting && ammo.currentAmmo > 0) Shoot();
 
@@ -97,7 +102,7 @@ public class WeaponManager : MonoBehaviour
 
         for (int i = 0; i < bulletsPerShot; i++)
         {
-            Bullet bullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+            Bullet bullet = bulletPool.Get();
             bullet.Release();
         }
 
@@ -109,6 +114,28 @@ public class WeaponManager : MonoBehaviour
 
         if (fireRateTimer >= fireRate) return true;
         return false;
+    }
+    private Bullet CreateBullet()
+    {
+        Bullet bullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
+        bullet.SetPool(bulletPool);
+
+        return bullet;
+    }
+    private void OnBulletGet(Bullet bullet)
+    {
+        bullet.transform.position = barrel.transform.position;
+        bullet.transform.rotation = barrel.transform.rotation;
+        bullet.gameObject.SetActive(true);
+    }
+    private void OnBulletRelease(Bullet bullet)
+    {
+        bullet.rb.velocity = Vector3.zero;
+        bullet.gameObject.SetActive(false);
+    }
+    private void OnBulletDestroy(Bullet bullet)
+    {
+        Destroy(bullet.gameObject);
     }
     private void TriggerMuzzleFlash()
     {
@@ -132,4 +159,5 @@ public class WeaponManager : MonoBehaviour
         action.rightTargetTransform.localPosition = new Vector3(rightTargetPosition.x, rightTargetPosition.y, rightTargetPosition.z);
         action.rightTargetTransform.localRotation = Quaternion.Euler(rightTargetRotation.x, rightTargetRotation.y, rightTargetRotation.z);
     }
+    public AmmoType GetAmmoType() => ammo.ammoType;
 }

@@ -3,25 +3,34 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private ItemBase itemBase;
+    [SerializeField] private ParticleSystem rarityParticle;
     [SerializeField] private float pickUpDistance = 2f;
 
     protected bool isCollected = false;
     protected bool isInEquipment;
 
-    private ActionStateManager action;
-    private Item3DTooltip tooltip;
+    protected ActionStateManager action;
+    protected Item3DTooltip tooltip;
 
     protected EquipmentUI equipmentUI;
     [HideInInspector] public Animator anim;
     public ItemBase ItemBase => itemBase;
-    public virtual bool IsInEquipment { get => isInEquipment; set => isInEquipment = value; }
-
+    public virtual bool IsInEquipment
+    {
+        get => isInEquipment;
+        set
+        {
+            SetRarityParticle(value);
+            isInEquipment = value;
+        }
+    }
     protected virtual void Awake()
     {
         action = FindObjectOfType<ActionStateManager>();
         equipmentUI = FindObjectOfType<EquipmentUI>();
         tooltip = FindObjectOfType<Item3DTooltip>();
         anim = GetComponent<Animator>();
+        SetRarityParticle(IsInEquipment);
     }
     private void Update()
     {
@@ -35,10 +44,14 @@ public class Interactable : MonoBehaviour
 
             if (isCollected)
             {
-                equipmentUI.AddItem(ItemBase);
-                Destroy(gameObject);
+                PickUp();
             }
         }
+    }
+    protected virtual void PickUp()
+    {
+        equipmentUI.AddItem(ItemBase);
+        Destroy(gameObject);
     }
     private void OnMouseEnter()
     {
@@ -54,5 +67,13 @@ public class Interactable : MonoBehaviour
     {
         if (Application.isFocused)
             action.CanPickUp = false;
+    }
+    protected void SetRarityParticle(bool isStopped)
+    {
+        rarityParticle.gameObject.SetActive(!isStopped);
+
+        ParticleSystem.MainModule main = rarityParticle.main;
+        Color rarityColor = new Color(itemBase.ItemRarity.color.r, itemBase.ItemRarity.color.g, itemBase.ItemRarity.color.b, 0.2f);
+        main.startColor = rarityColor;
     }
 }

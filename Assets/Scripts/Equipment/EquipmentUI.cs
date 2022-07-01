@@ -102,6 +102,12 @@ public class EquipmentUI : MonoBehaviour
     }
     public void AddItem(ItemBase item)
     {
+        //if (item as AmmoItem != null)
+        //{
+        //    AmmoItem ammo = item as AmmoItem;
+
+        //    WeaponAmmo weaponAmmo = 
+        //}
         if (item as WeaponItem != null)
         {
             EquipmentSlot emptySlot = equipmentSlots.Where(x => x.ItemBase == null).FirstOrDefault();
@@ -110,8 +116,8 @@ public class EquipmentUI : MonoBehaviour
             {
                 emptySlot.ItemBase = item;
                 itemHolder.CreateItem(item.ItemPrefab, emptySlot.SlotIndex);
-                
-                if(emptySlot.IsSelected) itemHolder.SetItemActive(emptySlot.SlotIndex);
+
+                if (emptySlot.IsSelected) itemHolder.SetItemActive(emptySlot.SlotIndex);
             }
             else
             {
@@ -152,5 +158,17 @@ public class EquipmentUI : MonoBehaviour
     {
         AddItem(testItemBase2);
         AddItem(testItemBase);
+    }
+    public EquipmentSlot GetWeaponSlot(WeaponItem weapon)
+    {
+        EquipmentSlot weaponSlot = equipmentSlots
+            .Where(x => (x.ItemBase as WeaponItem) != null)
+            .Where(x => x.ItemBase == weapon)
+            .FirstOrDefault();
+
+        if (weaponSlot != null)
+            return weaponSlot;
+
+        return null;
     }
 }

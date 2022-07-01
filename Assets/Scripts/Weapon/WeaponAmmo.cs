@@ -10,6 +10,8 @@ public class WeaponAmmo : MonoBehaviour
     public AudioClip magOutSound;
     public AudioClip releaseSlideSound;
 
+    public AmmoType ammoType;
+
     [HideInInspector] public int currentAmmo;
     public bool CanReload => currentAmmo < clipSize && extraAmmo > 0;
     public int FullAmmo
@@ -25,7 +27,6 @@ public class WeaponAmmo : MonoBehaviour
     {
         currentAmmo = clipSize;
     }
-
     public void Reload()
     {
         if (currentAmmo < clipSize)
@@ -49,4 +50,5 @@ public class WeaponAmmo : MonoBehaviour
             }
         }
     }
+    public void AddAmmo(int ammo) => extraAmmo += ammo;
 }

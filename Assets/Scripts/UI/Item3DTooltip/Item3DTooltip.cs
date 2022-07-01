@@ -19,11 +19,13 @@ public class Item3DTooltip : MonoBehaviour
     {
         itemNameText.SetText(itemBase.name);
         itemNameText.color = itemBase.ItemRarity.color;
-        
+
         WeaponItem weaponItem = itemBase as WeaponItem;
-        if(weaponItem != null)
+        AmmoItem ammoItem = itemBase as AmmoItem;
+
+        if (weaponItem != null || ammoItem != null)
         {
-            itemInfoText.text = $"Ammo: {weaponItem.Amount}";
+            itemInfoText.text = $"Ammo: {itemBase.Amount}";
         }
         else
         {

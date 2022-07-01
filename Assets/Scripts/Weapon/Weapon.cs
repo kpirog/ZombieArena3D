@@ -3,7 +3,7 @@ using UnityEngine;
 public class Weapon : Interactable
 {
     [HideInInspector] public WeaponManager weaponManager;
-    private WeaponAmmo weaponAmmo;
+    [HideInInspector] public WeaponAmmo weaponAmmo;
     private WeaponRecoil weaponRecoil;
     private WeaponBloom weaponBloom;
 
@@ -12,6 +12,7 @@ public class Weapon : Interactable
         get => isInEquipment;
         set
         {
+            SetRarityParticle(value);
             ToggleComponents(value);
             isInEquipment = value;
         } 

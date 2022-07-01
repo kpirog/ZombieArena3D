@@ -21,4 +21,13 @@ public class HandSlot : MonoBehaviour
         Destroy(item.gameObject);
         item = null;
     }
+    public WeaponAmmo GetWeaponAmmo()
+    {
+        if (item as Weapon != null)
+        {
+            return (item as Weapon).weaponAmmo;
+        }
+
+        return null;
+    }
 }

@@ -25,9 +25,11 @@ public class ItemHolder : MonoBehaviour
     }
     public void CreateItem(Interactable interactable, int slotIndex)
     {
-        handSlots[slotIndex].gameObject.SetActive(true);
-        handSlots[slotIndex].CreateItem(interactable);
-        handSlots[slotIndex].gameObject.SetActive(false);
+        HandSlot currentSlot = handSlots[slotIndex];
+        
+        currentSlot.gameObject.SetActive(true);
+        currentSlot.CreateItem(interactable);
+        currentSlot.gameObject.SetActive(false);
     }
     public void SetItemActive(int index)
     {
@@ -51,5 +53,26 @@ public class ItemHolder : MonoBehaviour
     public void DestroyItem(int index)
     {
         handSlots[index].DestroyItem();
+    }
+    public WeaponAmmo GetWeaponAmmo(AmmoType ammoType)
+    {
+        List<WeaponAmmo> ammos = new List<WeaponAmmo>();
+        ammos.Clear();
+
+        foreach (HandSlot slot in handSlots)
+        {
+            if (slot.GetWeaponAmmo() == null) continue;
+
+            ammos.Add(slot.GetWeaponAmmo());
+        }
+
+        if(ammos.Count > 0)
+        {
+            WeaponAmmo ammo = ammos.Where(x => x.ammoType == ammoType).FirstOrDefault();
+
+            return ammo;
+        }
+
+        return null;
     }
 }

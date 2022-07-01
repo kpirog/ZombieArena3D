@@ -9,10 +9,9 @@ public class ActionStateManager : MonoBehaviour
     public ReloadState Reload = new ReloadState();
     public NormalState Normal = new NormalState();
 
-    public WeaponManager currentWeapon;
+    [HideInInspector] public WeaponManager currentWeapon;
 
     [HideInInspector] public Animator anim;
-    private AudioSource audioSource;
     private PlayerInput playerInput;
     [HideInInspector] public InputAction reloadAction;
     [HideInInspector] public InputAction pickUpAction;
