@@ -18,11 +18,14 @@ public class ActionStateManager : MonoBehaviour
 
     public MultiAimConstraint rHandRig;
     public TwoBoneIKConstraint lHandIK;
+    [HideInInspector] public RigController rigController;
+
     public Transform rightHintTransform;
     public Transform rightTargetTransform;
     public Transform leftHintTransform;
     public Transform leftTargetTransform;
 
+    [HideInInspector] public EquipmentUI equipmentUI;
     public AudioSource AudioSource => currentWeapon.AudioSource;
     public bool CanPickUp { get; set; } = false;
     public bool IsPickingUp => CanPickUp;
@@ -34,6 +37,8 @@ public class ActionStateManager : MonoBehaviour
         currentWeapon = GetComponentInChildren<WeaponManager>();
         reloadAction = playerInput.actions["Reload"];
         pickUpAction = playerInput.actions["PickUp"];
+        rigController = FindObjectOfType<RigController>();
+        equipmentUI = FindObjectOfType<EquipmentUI>();
     }
 
     private void Start()

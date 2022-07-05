@@ -44,6 +44,7 @@ public class AimStateManager : MonoBehaviour
     private MovementStateManager movement;
     [HideInInspector] public HudUI hudUI;
     [HideInInspector] public Animator anim;
+    [HideInInspector] public EquipmentUI equipmentUI;
     public Transform recoilTransform;
     private PlayerInput playerInput;
     private InputAction lookAction;
@@ -56,6 +57,7 @@ public class AimStateManager : MonoBehaviour
         lookAction = playerInput.actions["Look"];
         aimAction = playerInput.actions["Aim"];
         shoulderSwapAction = playerInput.actions["ShoulderSwap"];
+        equipmentUI = FindObjectOfType<EquipmentUI>();
     }
     private void OnEnable()
     {
@@ -113,6 +115,11 @@ public class AimStateManager : MonoBehaviour
     }
     public void SwitchState(AimBaseState state)
     {
+        if (state is AimState && equipmentUI.EquippedItem is ConsumableItem)
+        {
+            return;
+        }
+
         currentState = state;
         currentState.EnterState(this);
     }

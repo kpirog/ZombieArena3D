@@ -63,8 +63,8 @@ public class WeaponManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        shootAction.performed += ctx => IsShooting = true;
-        shootAction.canceled += ctx => IsShooting = false;
+        shootAction.performed -= ctx => IsShooting = true;
+        shootAction.canceled -= ctx => IsShooting = false;
     }
     private void Start()
     {

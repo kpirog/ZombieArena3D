@@ -38,4 +38,27 @@ public class PlayerStats : MonoBehaviour
             needBarsController.onPlayerStatsUpdated?.Invoke();
         }
     }
+
+    public void AddHealth(float value)
+    {
+        currentHealth += value;
+
+        if (currentHealth > StatsModel.MaxHealth)
+        {
+            currentHealth = StatsModel.MaxHealth;
+        }
+
+        needBarsController.onPlayerStatsUpdated?.Invoke();
+    }
+    public void AddShield(float value)
+    {
+        currentShield += value;
+
+        if (currentShield > StatsModel.MaxShield)
+        {
+            currentShield = StatsModel.MaxShield;
+        }
+
+        needBarsController.onPlayerStatsUpdated?.Invoke();
+    }
 }

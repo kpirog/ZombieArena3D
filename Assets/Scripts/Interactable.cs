@@ -14,7 +14,7 @@ public class Interactable : MonoBehaviour
     protected Item3DTooltip tooltip;
 
     protected EquipmentUI equipmentUI;
-    public Animator anim;
+    [HideInInspector] public Animator anim;
     public ItemBase ItemBase => itemBase;
     public virtual bool IsInEquipment
     {
@@ -24,6 +24,8 @@ public class Interactable : MonoBehaviour
             SetRarityParticle(value);
             isInEquipment = value;
             anim.SetBool("IsInEquipment", value);
+
+            anim.enabled = !value;
         }
     }
     protected virtual void Awake()

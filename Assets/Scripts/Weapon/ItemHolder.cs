@@ -7,13 +7,16 @@ public class ItemHolder : MonoBehaviour
     public List<HandSlot> handSlots;
 
     private ActionStateManager actionStateManager;
-
+    private RigController rigController;
+    private ConsumableManager consumableManager;
     private bool AnyHandSlotActive => handSlots.Any(x => x.gameObject.activeInHierarchy);
 
     private void Awake()
     {
         handSlots = new List<HandSlot>(GetComponentsInChildren<HandSlot>());
         actionStateManager = FindObjectOfType<ActionStateManager>();
+        rigController = FindObjectOfType<RigController>();
+        consumableManager = FindObjectOfType<ConsumableManager>();
     }
     private void Start()
     {
@@ -21,12 +24,12 @@ public class ItemHolder : MonoBehaviour
     }
     private void Update()
     {
-        if(!AnyHandSlotActive) SetItemActive(0);
+        if (!AnyHandSlotActive) SetItemActive(0);
     }
     public void CreateItem(Interactable interactable, int slotIndex)
     {
         HandSlot currentSlot = handSlots[slotIndex];
-        
+
         currentSlot.gameObject.SetActive(true);
         currentSlot.CreateItem(interactable);
         currentSlot.gameObject.SetActive(false);
@@ -44,10 +47,31 @@ public class ItemHolder : MonoBehaviour
             HandSlot currentSlot = handSlots[index];
             currentSlot.gameObject.SetActive(true);
 
-            if (currentSlot.item as Weapon != null)
+            Interactable item = currentSlot.item;
+
+            AssignActiveItem(item);
+            consumableManager.SetItem(item);
+        }
+    }
+    private void AssignActiveItem(Interactable item)
+    {
+        if (item != null)
+        {
+            item.IsInEquipment = true;
+
+            if (item as Weapon != null)
             {
-                actionStateManager.SwitchCurrentWeapon((currentSlot.item as Weapon).weaponManager);
+                actionStateManager.SwitchCurrentWeapon((item as Weapon).weaponManager);
+                rigController.onRigChanged?.Invoke(true);
             }
+            else
+            {
+                rigController.onRigChanged?.Invoke(false);
+            }
+        }
+        else
+        {
+            rigController.onRigChanged?.Invoke(false);
         }
     }
     public void DestroyItem(int index)
@@ -66,7 +90,7 @@ public class ItemHolder : MonoBehaviour
             ammos.Add(slot.GetWeaponAmmo());
         }
 
-        if(ammos.Count > 0)
+        if (ammos.Count > 0)
         {
             WeaponAmmo ammo = ammos.Where(x => x.ammoType == ammoType).FirstOrDefault();
 

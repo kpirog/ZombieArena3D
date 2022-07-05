@@ -2323,6 +2323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6421279891065594955}
   - component: {fileID: 6421279891065594948}
+  - component: {fileID: 1645830192}
   m_Layer: 7
   m_Name: Rig 1
   m_TagString: Untagged
@@ -2364,6 +2365,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
+--- !u!114 &1645830192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421279891065594949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de7acea84ed6d8428c60d770da27e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rHandRig: {fileID: 6421279892224749563}
+  bodyRig: {fileID: 6421279890913358760}
+  headRig: {fileID: 6421279892337434938}
+  rHandIK: {fileID: 705764263}
+  lHandIK: {fileID: 6421279892689536800}
 --- !u!1 &6421279891319936300
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2632,7 @@ MonoBehaviour:
     m_Flags: 0
   rHandRig: {fileID: 6421279892224749563}
   lHandIK: {fileID: 6421279892689536800}
+  rigController: {fileID: 0}
   rightHintTransform: {fileID: 59960321}
   rightTargetTransform: {fileID: 508869594}
   leftHintTransform: {fileID: 6421279890844970500}

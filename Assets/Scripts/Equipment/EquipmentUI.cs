@@ -23,6 +23,7 @@ public class EquipmentUI : MonoBehaviour
 
     private int gamepadSlotIndex;
     public EquipmentSlot SelectedSlot => equipmentSlots.Where(x => x.IsSelected).FirstOrDefault();
+    public ItemBase EquippedItem => SelectedSlot.ItemBase;
 
     private void Awake()
     {

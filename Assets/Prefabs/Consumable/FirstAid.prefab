@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8136155952344233716}
   - component: {fileID: 2558743978725559789}
   - component: {fileID: 4374449653784272685}
-  - component: {fileID: 7242204843269851775}
+  - component: {fileID: 4066854988447119700}
   m_Layer: 0
   m_Name: FirstAid
   m_TagString: Untagged
@@ -28,15 +28,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7554147050216636968}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -33.53, y: 4.13, z: 30.93}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7567697221776113067}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2582224842113911309
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7242204843269851775
+--- !u!114 &4066854988447119700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,13 +129,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7554147050216636968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2d030f9efb73564f9c170a744813ea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 50d14c11a9d10b147a50b56331536eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemBase: {fileID: 11400000, guid: 9ee33664076bbed46a2946dfcfd2c670, type: 2}
   rarityParticle: {fileID: 9006143037587361609}
   pickUpDistance: 2
   anim: {fileID: 0}
+  positionInHand: {x: 0.345, y: 0.137, z: 0.023}
+  rotationInHand: {x: -6.262, y: -173.4, z: -81.22}
+  timeToRegen: 3
 --- !u!1001 &6751501941612871452
 PrefabInstance:
   m_ObjectHideFlags: 0

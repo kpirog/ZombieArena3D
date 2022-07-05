@@ -13,6 +13,6 @@ public class DefaultState : AimBaseState
 
     public override void UpdateState(AimStateManager aim)
     {
-        if (aim.IsAiming) aim.SwitchState(aim.Aim);
+        if (aim.IsAiming && aim.equipmentUI.EquippedItem != null) aim.SwitchState(aim.Aim);
     }
 }
