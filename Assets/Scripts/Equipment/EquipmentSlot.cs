@@ -14,6 +14,10 @@ public class EquipmentSlot : MonoBehaviour
 
     private ItemBase itemBase;
     private RectTransform iconRectTransform;
+    private ItemHolder itemHolder;
+
+    public int ConsumableAmount { get; set; } = 1;
+
     private bool isSelected = false;
     public ItemBase ItemBase { get => itemBase; set { itemBase = value; UpdateSlotUI(); } }
     public int SlotIndex { get; private set; }
@@ -33,6 +37,7 @@ public class EquipmentSlot : MonoBehaviour
     {
         SlotIndex = transform.GetSiblingIndex();
         iconRectTransform = itemIcon.GetComponent<RectTransform>();
+        itemHolder = FindObjectOfType<ItemHolder>();
     }
     private void OnEnable()
     {
@@ -57,7 +62,7 @@ public class EquipmentSlot : MonoBehaviour
         EnableSlotUI(true);
         itemIcon.sprite = ItemBase.ItemIcon;
         itemIcon.color = ItemBase.ItemRarity.color;
-        amountText.text = ItemBase.Amount > 1 ? ItemBase.Amount.ToString() : string.Empty;
+        SetItemAmountText();
         EquipmentUI.Instance.SetSlotInputUI(this);
     }
     private void EnableSlotUI(bool enable)
@@ -70,7 +75,7 @@ public class EquipmentSlot : MonoBehaviour
     {
         Color lightColor = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.1f);
         Color darkColor = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 1f);
-        
+
         if (selected)
         {
             iconRectTransform.offsetMax = new Vector2(-5f, -5f);
@@ -86,4 +91,40 @@ public class EquipmentSlot : MonoBehaviour
     }
     public void UpdateAmmoUI(int ammo) => amountText.text = ammo > 1 ? ammo.ToString() : string.Empty;
     public void SetInputText(string text) => inputText.SetText(text);
+    private void SetItemAmountText()
+    {
+        if (ItemBase as ConsumableItem)
+        {
+            amountText.text = ConsumableAmount > 1 ? ConsumableAmount.ToString() : string.Empty;
+        }
+        else
+        {
+            amountText.text = ItemBase.Amount > 1 ? ItemBase.Amount.ToString() : string.Empty;
+        }
+    }
+    public void UpdateConsumableAmount(bool increase)
+    {
+        ConsumableItem consumableItem = ItemBase as ConsumableItem;
+
+        if (consumableItem != null)
+        {
+            if (increase)
+            {
+                ConsumableAmount++;
+            }
+            else
+            {
+                ConsumableAmount--;
+
+                if (ConsumableAmount < 1)
+                {
+                    ItemBase = null;
+                    itemHolder.DestroyItem(SlotIndex);
+                    ConsumableAmount = 1;
+                }
+            }
+
+            UpdateSlotUI();
+        }
+    }
 }

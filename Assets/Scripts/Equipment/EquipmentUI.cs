@@ -103,24 +103,52 @@ public class EquipmentUI : MonoBehaviour
     }
     public void AddItem(ItemBase item)
     {
-        if (item as WeaponItem != null || item as ConsumableItem != null)
+        if (item as WeaponItem != null)
         {
-            EquipmentSlot emptySlot = equipmentSlots.Where(x => x.ItemBase == null).FirstOrDefault();
+            AddItemToEmptySlotOrSwap(item);
+        }
+        else if (item as ConsumableItem != null)
+        {
+            EquipmentSlot sameSlot = equipmentSlots.Where(x => x.ItemBase == item).FirstOrDefault();
 
-            if (emptySlot != null)
+            if (sameSlot != null)
             {
-                emptySlot.ItemBase = item;
-                itemHolder.CreateItem(item.ItemPrefab, emptySlot.SlotIndex);
-
-                if (emptySlot.IsSelected) itemHolder.SetItemActive(emptySlot.SlotIndex);
+                sameSlot.UpdateConsumableAmount(true);
             }
             else
             {
-                EquipmentSlot currentSlot = SelectedSlot;
-                DropItem(currentSlot.ItemBase);
-                currentSlot.ItemBase = item;
+                AddItemToEmptySlotOrSwap(item);
             }
         }
+    }
+    private void AddItemToEmptySlotOrSwap(ItemBase item)
+    {
+        EquipmentSlot emptySlot = equipmentSlots.Where(x => x.ItemBase == null).FirstOrDefault();
+
+        if (emptySlot != null)
+        {
+            SetChosenSlot(emptySlot, item);
+        }
+        else
+        {
+            SwapItem(item);
+        }
+    }
+    private void SwapItem(ItemBase item)
+    {
+        EquipmentSlot currentSlot = SelectedSlot;
+        DropItem(currentSlot.ItemBase);
+
+        itemHolder.DestroyItem(currentSlot.SlotIndex);
+
+        SetChosenSlot(currentSlot, item);
+    }
+    private void SetChosenSlot(EquipmentSlot slot, ItemBase item)
+    {
+        slot.ItemBase = item;
+        itemHolder.CreateItem(item.ItemPrefab, slot.SlotIndex);
+
+        if (slot.IsSelected) itemHolder.SetItemActive(slot.SlotIndex);
     }
     private void DropItem(ItemBase item)
     {
@@ -129,7 +157,6 @@ public class EquipmentUI : MonoBehaviour
             Vector3 dropPosition = new Vector3(player.localPosition.x, player.localPosition.y, player.localPosition.z) + player.forward;
             Interactable dropItem = Instantiate(item.ItemPrefab, dropPosition, Quaternion.identity);
             dropItem.IsInEquipment = false;
-            itemHolder.DestroyItem(SelectedSlot.SlotIndex);
         }
     }
     private void DropActiveItem()
@@ -139,7 +166,16 @@ public class EquipmentUI : MonoBehaviour
         if (item != null)
         {
             DropItem(SelectedSlot.ItemBase);
-            SelectedSlot.ItemBase = null;
+
+            if (item is ConsumableItem)
+            {
+                SelectedSlot.UpdateConsumableAmount(false);
+            }
+            else
+            {
+                SelectedSlot.ItemBase = null;
+                itemHolder.DestroyItem(SelectedSlot.SlotIndex);
+            }
         }
     }
     public void SetSlotInputUI(EquipmentSlot slot)

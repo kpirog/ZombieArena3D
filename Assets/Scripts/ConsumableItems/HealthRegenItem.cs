@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class HealthRegenItem : Consumable
@@ -10,17 +9,17 @@ public class HealthRegenItem : Consumable
     {
         if (playerStats.CurrentHealth < playerStats.StatsModel.MaxHealth)
         {
-            StartCoroutine(RegenHealthAfterTime());
+            Invoke(nameof(HealthRegen), timeToRegen);
         }
     }
-    private IEnumerator RegenHealthAfterTime()
+    private void HealthRegen()
     {
-        yield return new WaitForSeconds(timeToRegen);
         playerStats.AddHealth(ConsumableItem.HealthRegen);
-        
-        equipmentUI.SelectedSlot.ItemBase = null;
-        equipmentUI.SelectedSlot.UpdateSlotUI();
-        
-        Destroy(gameObject);
+        equipmentUI.SelectedSlot.UpdateConsumableAmount(false);
+
+        if (equipmentUI.SelectedSlot.ConsumableAmount < 1)
+        {
+            Destroy(gameObject);
+        }
     }
 }
